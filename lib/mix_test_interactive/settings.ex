@@ -20,10 +20,12 @@ defmodule MixTestInteractive.Settings do
     field :patterns, [String.t()], default: []
     field :stale?, boolean(), default: false
     field :watching?, boolean(), default: true
+    field :clear?, boolean(), default: false
   end
 
   @options [
-    watch: :boolean
+    watch: :boolean,
+    clear: :boolean
   ]
 
   @mix_test_options [
@@ -71,13 +73,15 @@ defmodule MixTestInteractive.Settings do
     {failed?, opts} = Keyword.pop(opts, :failed, false)
     {stale?, opts} = Keyword.pop(opts, :stale, false)
     {watching?, opts} = Keyword.pop(opts, :watch, true)
+    {clear?, opts} = Keyword.pop(opts, :clear, false)
 
     %__MODULE__{
       failed?: no_patterns? && failed?,
       initial_cli_args: OptionParser.to_argv(opts),
       patterns: patterns,
       stale?: no_patterns? && !failed? && stale?,
-      watching?: watching?
+      watching?: watching?,
+      clear?: clear?
     }
   end
 
@@ -100,6 +104,14 @@ defmodule MixTestInteractive.Settings do
   @spec toggle_watch_mode(t()) :: t()
   def toggle_watch_mode(settings) do
     %{settings | watching?: !settings.watching?}
+  end
+
+  @doc """
+  Toggle clearing console on or off.
+  """
+  @spec toggle_clear(t()) :: t()
+  def toggle_clear(settings) do
+    %{settings | clear?: !settings.clear?}
   end
 
   @doc """

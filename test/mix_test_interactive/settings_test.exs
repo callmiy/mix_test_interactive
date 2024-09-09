@@ -3,6 +3,27 @@ defmodule MixTestInteractive.SettingsTest do
 
   alias MixTestInteractive.Settings
 
+  describe "clearing console" do
+    test "consumes --clear flag" do
+      settings = Settings.new(["--clear"])
+      assert {:ok, []} = Settings.cli_args(settings)
+      assert settings.clear?
+    end
+
+    test "toggles" do
+      new_settings = Settings.new()
+
+      # Default value of clear is false
+      refute new_settings.clear?
+
+      settings_with_clear_on = Settings.toggle_clear(new_settings)
+      assert settings_with_clear_on.clear?
+
+      settings_with_clear_off = Settings.toggle_clear(settings_with_clear_on)
+      refute settings_with_clear_off.clear?
+    end
+  end
+
   describe "watch mode" do
     test "enabled by default" do
       settings = Settings.new()

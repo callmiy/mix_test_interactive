@@ -53,6 +53,7 @@ defmodule Mix.Tasks.Test.Interactive do
   - `s`: Run only test files that reference modules that have changed since the
   last run (equivalent to the `--stale` option of `mix test`).
   - `w`: Turn file-watching mode on or off.
+  - `c`: Turn clearing console on or off before each run (default off).
   - `Enter`: Re-run the current set of tests without requiring a file change.
 
   ## Configuration
@@ -60,7 +61,6 @@ defmodule Mix.Tasks.Test.Interactive do
   If your project has a `config/config.exs` file, you can customize the
   operation of `mix test.interactive` with the following settings:
 
-  - `clear: true`: Clear the console before each run (default: `false`).
   - `command: <program>` or `command: {<program>, [<arg>, ...]}`:
     Use the provided command and arguments to run the test task (default: `mix`).
   - `exclude: [patterns...]`: A list of `Regex`es to ignore when watching for

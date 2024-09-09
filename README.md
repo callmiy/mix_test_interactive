@@ -39,6 +39,12 @@ If you don't want tests to run automatically when files change, you can start `m
 mix test.interactive --no-watch
 ```
 
+If you want `mix test.interactive` to clear the console before each run, you can enable this option with `--clear`
+flag.
+
+```sh
+mix test.interactive --clear
+```
 After the tests run, you can use the interactive mode to change which tests will run.
 
 Use the `p` command to run only test files that match one or more provided patterns. A pattern is the project-root-relative path to a test file (with or without a line number specification) or a string that matches a portion of full pathname. e.g. `test/my_project/my_test.exs`, `test/my_project/my_test.exs:12:24` or `my`.
@@ -62,6 +68,8 @@ Use the `Enter` key to re-run the current set of tests without requiring a file 
 
 Use the `q` command, or press `Ctrl-D` to exit the program.
 
+Use the `c` command to turn clearing console on or off before each run.
+
 ## Passing Arguments To Tasks
 
 Any command line arguments passed to the `mix test.interactive` task will be passed
@@ -77,21 +85,6 @@ mix test.interactive --trace
 
 `mix test.interactive` can be configured with various options using application
 configuration.
-
-### `clear`: Clear the console before each run
-
-If you want `mix test.interactive` to clear the console before each run, you can
-enable this option in your config/dev.exs as follows:
-
-```elixir
-# config/config.exs
-import Config
-
-if Mix.env == :dev do
-  config :mix_test_interactive,
-    clear: true
-end
-```
 
 ### `command`: Use a custom command
 

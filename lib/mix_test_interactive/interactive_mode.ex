@@ -114,7 +114,7 @@ defmodule MixTestInteractive.InteractiveMode do
 
   defp do_run_tests(config, settings) do
     with {:ok, args} <- Settings.cli_args(settings),
-         :ok <- Runner.run(config, args) do
+         :ok <- Runner.run(config, settings, args) do
       :ok
     else
       {:error, :no_matching_files} ->

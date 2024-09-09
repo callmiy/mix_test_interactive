@@ -4,12 +4,6 @@ defmodule MixTestInteractive.ConfigTest do
   alias MixTestInteractive.Config
 
   describe "creation" do
-    test "takes :clear? from the env" do
-      Process.put(:clear, true)
-      config = Config.new()
-      assert config.clear?
-    end
-
     test "takes :command as a string from the env" do
       command = "/path/to/command"
 

@@ -6,7 +6,6 @@ defmodule MixTestInteractive.Config do
 
   alias MixTestInteractive.AppConfig
 
-  @default_clear false
   @default_command {"mix", []}
   @default_exclude [~r/\.#/, ~r{priv/repo/migrations}]
   @default_extra_extensions []
@@ -15,7 +14,6 @@ defmodule MixTestInteractive.Config do
   @default_task "test"
 
   typedstruct do
-    field :clear?, boolean, default: @default_clear
     field :command, {String.t(), [String.t()]}, default: @default_command
     field :exclude, [Regex.t()], default: @default_exclude
     field :extra_extensions, [String.t()], default: @default_extra_extensions
@@ -30,7 +28,6 @@ defmodule MixTestInteractive.Config do
   @spec new() :: t()
   def new do
     %__MODULE__{
-      clear?: get_clear(),
       command: get_command(),
       exclude: get_excluded(),
       extra_extensions: get_extra_extensions(),
@@ -38,10 +35,6 @@ defmodule MixTestInteractive.Config do
       show_timestamp?: get_show_timestamp(),
       task: get_task()
     }
-  end
-
-  defp get_clear do
-    AppConfig.get(:clear, @default_clear)
   end
 
   defp get_command do

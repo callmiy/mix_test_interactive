@@ -5,6 +5,7 @@ defmodule MixTestInteractive.RunnerTest do
 
   alias MixTestInteractive.Config
   alias MixTestInteractive.Runner
+  alias MixTestInteractive.Settings
 
   defmodule DummyRunner do
     @moduledoc false
@@ -25,7 +26,7 @@ defmodule MixTestInteractive.RunnerTest do
 
       output =
         capture_io(fn ->
-          Runner.run(config, args)
+          Runner.run(config, Settings.new(), args)
         end)
 
       assert Agent.get(DummyRunner, fn x -> x end) == [{config, args}]
@@ -41,7 +42,7 @@ defmodule MixTestInteractive.RunnerTest do
 
       output =
         capture_io(fn ->
-          Runner.run(config, [])
+          Runner.run(config, Settings.new(), [])
         end)
 
       assert Agent.get(DummyRunner, fn x -> x end) == [{config, []}]

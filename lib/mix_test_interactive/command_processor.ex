@@ -12,6 +12,7 @@ defmodule MixTestInteractive.CommandProcessor do
   alias MixTestInteractive.Command.RunTests
   alias MixTestInteractive.Command.Stale
   alias MixTestInteractive.Command.ToggleWatchMode
+  alias MixTestInteractive.Command.ToggleClearConsole
   alias MixTestInteractive.Settings
 
   @type response :: Command.response()
@@ -24,7 +25,8 @@ defmodule MixTestInteractive.CommandProcessor do
     ToggleWatchMode,
     RunTests,
     Help,
-    Quit
+    Quit,
+    ToggleClearConsole
   ]
 
   @doc """

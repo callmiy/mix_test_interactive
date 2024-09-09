@@ -65,6 +65,13 @@ defmodule MixTestInteractive.CommandProcessorTest do
       assert {:no_run, ^expected} = process_command("w", settings)
     end
 
+    test "c toggles clearing console" do
+      settings = Settings.new()
+      expected = Settings.toggle_clear(settings)
+
+      assert {:ok, ^expected} = process_command("c", settings)
+    end
+
     test "? returns :help" do
       settings = Settings.new()
 
